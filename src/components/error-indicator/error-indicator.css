@@ -1,9 +1,12 @@
 .error__img {
     width: 150px;
     height: auto;
-    margin-right: 20px;
+    margin: 30px auto;
+    display: block;
 }
 
 .error__text {
-
+    margin: 0 0 30px;
+    display: block;
+    text-align: center;
 }

@@ -5,10 +5,10 @@ import icon from './star-death.jpg';
 
 const ErrorIndicator = () => {
     return (
-        <React.Fragment>
+        <div>
             <img className="error__img" src={icon}  />
             <div className="error__text">Some ERROR! Sory</div>
-        </React.Fragment>
+        </div>
     )
 };
 
