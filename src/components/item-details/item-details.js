@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
 
-import './person-details.css';
+import './item-details.css';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
 import ErrorButton from '../error-button'
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
     loading: false,
     hasData: false
   }
 
   componentDidMount() {
-    this.updatePerson()
+    this.updateItem()
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.setState({
         loading: true
       })
-      this.updatePerson()
+      this.updateItem()
     }
   }
 
-  updatePerson() {
-    const { personId } = this.props;
-    if (!personId) {
+  updateItem() {
+    const { itemId } = this.props;
+    if (!itemId) {
       return 
     }
 
     this.swapiService
-      .getPerson(personId)
-      .then((person) => {
+      .getItem(itemId)
+      .then((item) => {
         this.setState({
-          person,
+          item,
           loading: false,
           hasData: true
         })
@@ -47,12 +47,12 @@ export default class PersonDetails extends Component {
 
   render() {
 
-    const { person, loading, hasData } = this.state;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !loading && hasData ?
-      <PersoneView personInfo={person} /> 
+    const { item } = this.state;
+    const spinner = this.state.loading ? <Spinner /> : null;
+    const content = !this.state.loading && this.state.hasData ?
+      <ItemView itemInfo={item} /> 
       : null;
-    const prompt = !person && !loading ? <span>select a person</span> : null;
+    const prompt = !item && !this.state.loading ? <span>select an iten</span> : null;
 
     return (
 
@@ -65,7 +65,7 @@ export default class PersonDetails extends Component {
   }
 }
 
-const PersoneView = ({personInfo}) => {
+const ItemView = ({itemInfo}) => {
 
   const { 
     id,
@@ -73,7 +73,7 @@ const PersoneView = ({personInfo}) => {
     gender,
     birthYear,
     eyeColor
-  } = personInfo;
+  } = itemInfo;
 
   return (
     <React.Fragment >
